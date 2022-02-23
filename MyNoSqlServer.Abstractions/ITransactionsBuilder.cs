@@ -1,7 +1,7 @@
 ﻿
 namespace MyNoSqlServer.Abstractions
 {
-    public interface ITransactionsBuilder<T> : IAsyncDisposable where T : IMyNoSqlDbEntity, new()
+    public interface ITransactionsBuilder<T> : IAsyncDisposable where T : IMyNoSqlEntity, new()
     {
         ITransactionsBuilder<T> CleanTable();
         ITransactionsBuilder<T> DeletePartitions(string[] partitions);

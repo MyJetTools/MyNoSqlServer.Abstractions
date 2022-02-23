@@ -1,7 +1,7 @@
 
 namespace MyNoSqlServer.Abstractions
 {
-    public interface IMyNoSqlServerDataWriter<T> where T : IMyNoSqlDbEntity, new()
+    public interface IMyNoSqlServerDataWriter<T> where T : IMyNoSqlEntity, new()
     {
         ValueTask InsertAsync(T entity);
         ValueTask InsertOrReplaceAsync(T entity);
