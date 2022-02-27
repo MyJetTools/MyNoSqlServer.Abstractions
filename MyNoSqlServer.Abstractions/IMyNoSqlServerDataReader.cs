@@ -6,6 +6,8 @@ namespace MyNoSqlServer.Abstractions
 
     public interface IMyNoSqlServerDataReader<out T> where T : IMyNoSqlEntity
     {
+        Task IsInitialized();
+        
         T Get(string partitionKey, string rowKey);
 
         IReadOnlyList<T> Get(string partitionKey);
