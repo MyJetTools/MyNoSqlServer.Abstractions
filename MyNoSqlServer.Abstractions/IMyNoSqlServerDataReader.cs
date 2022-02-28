@@ -1,26 +1,21 @@
-using System;
-using System.Collections.Generic;
+
 
 namespace MyNoSqlServer.Abstractions
 {
 
-    public interface IMyNoSqlServerDataReader<out T> where T : IMyNoSqlEntity
+    public interface IMyNoSqlServerDataReader<out TDbRow> where TDbRow : IMyNoSqlEntity
     {
         Task IsInitialized();
-        
-        T Get(string partitionKey, string rowKey);
-
-        IReadOnlyList<T> Get(string partitionKey);
-        IReadOnlyList<T> Get(string partitionKey, int skip, int take);
-
-        IReadOnlyList<T> Get(string partitionKey, int skip, int take, Func<T, bool> condition);
-
-        IReadOnlyList<T> Get(string partitionKey, Func<T, bool> condition);
-        IReadOnlyList<T> Get(Func<T, bool> condition = null);
+        IReadOnlyList<TDbRow> Get(Func<TDbRow, bool>? condition = null);
+        TDbRow? Get(string partitionKey, string rowKey);
+        IReadOnlyList<TDbRow> Get(string partitionKey);
+        IReadOnlyList<TDbRow> Get(string partitionKey, Func<TDbRow, bool> condition);
+        IReadOnlyList<TDbRow> Get(string partitionKey, int skip, int take);
+        IReadOnlyList<TDbRow> Get(string partitionKey, int skip, int take, Func<TDbRow, bool> condition);
         int Count();
         int Count(string partitionKey);
-        int Count(string partitionKey, Func<T, bool> condition);
-        IMyNoSqlServerDataReader<T> SubscribeToUpdateEvents(Action<IReadOnlyList<T>> updateSubscriber, Action<IReadOnlyList<T>> deleteSubscriber);
+        int Count(string partitionKey, Func<TDbRow, bool> condition);
+        IMyNoSqlServerDataReader<TDbRow> SubscribeToUpdateEvents(Action<IReadOnlyList<TDbRow>> updateSubscriber, Action<IReadOnlyList<TDbRow>> deleteSubscriber);
     }
 
 }
